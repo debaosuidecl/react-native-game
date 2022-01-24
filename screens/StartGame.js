@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View, Text, StyleSheet, Button, Keyboard,
     TouchableWithoutFeedback, Alert, Dimensions, ScrollView, KeyboardAvoidingView
@@ -20,10 +20,16 @@ const StartGame = ({ startGame }) => {
         setenteredvalue("")
     }
 
-    const updateLayout = () => {
-        setButtonWidth(Dimensions.get("window").width)
-    }
-    Dimensions.addEventListener("change", updateLayout);
+    useEffect(() => {
+        const updateLayout = () => {
+            setButtonWidth(Dimensions.get("window").width)
+        }
+        Dimensions.addEventListener("change", updateLayout);
+
+        return () => Dimensions.removeEventListener(updateLayout)
+    }, [])
+
+
     const confirminputhandler = () => {
 
         const chosenNumber = parseInt(enteredvalue)
