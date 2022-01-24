@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import * as Font from 'expo-font'
 import Header from "./components/Header"
 import StartGame from './screens/StartGame';
@@ -48,12 +48,13 @@ export default function App() {
   else if (guessRounds > 0) {
     content = <GameOverScreen rounds={guessRounds} usernumber={usernumber} restartGame={restartGameHandler} />
   }
-  return (
-    <View style={styles.screen} >
-      <Header title="Guessing Game" />
-      {content}
+  return (<SafeAreaView style={styles.screen}>
 
-    </View>
+    <Header title="Guessing Game" />
+    {content}
+
+
+  </SafeAreaView>
   );
 }
 
